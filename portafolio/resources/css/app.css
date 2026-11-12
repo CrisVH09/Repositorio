@@ -3,7 +3,90 @@
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-serif: 'Newsreader', ui-serif, Georgia, Cambria, 'Times New Roman', serif;
+
+    --color-paper: #faf9f6;
+    --color-ink: #1c1917;
+
+    --color-accent-50: oklch(0.98 0.02 230);
+    --color-accent-100: oklch(0.95 0.05 230);
+    --color-accent-400: oklch(0.78 0.13 232);
+    --color-accent-500: oklch(0.70 0.15 235);
+    --color-accent-600: oklch(0.60 0.14 240);
+    --color-accent-700: oklch(0.50 0.12 242);
+}
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+
+    ::selection {
+        background-color: var(--color-accent-100);
+        color: var(--color-ink);
+    }
+
+    .dark ::selection {
+        background-color: var(--color-accent-700);
+        color: var(--color-white);
+    }
+}
+
+/* Underlined text link with the accent color on the underline only. */
+@utility link {
+    @apply text-stone-900 underline decoration-accent-500/70 decoration-1 underline-offset-[5px] transition-colors hover:decoration-accent-600 hover:decoration-2 dark:text-stone-100 dark:decoration-accent-400/70 dark:hover:decoration-accent-400;
+}
+
+/*
+ * Typography for Markdown content (blog posts and case studies).
+ */
+@layer components {
+    .prose-content {
+        @apply max-w-none text-[17px] leading-[1.75] text-stone-700 dark:text-stone-300;
+    }
+
+    .prose-content > * + * {
+        @apply mt-5;
+    }
+
+    .prose-content h2 {
+        @apply mt-12 font-serif text-2xl font-medium text-stone-900 dark:text-stone-50;
+    }
+
+    .prose-content h3 {
+        @apply mt-8 font-serif text-xl font-medium text-stone-900 dark:text-stone-50;
+    }
+
+    .prose-content a {
+        @apply link;
+    }
+
+    .prose-content strong {
+        @apply font-semibold text-stone-900 dark:text-stone-100;
+    }
+
+    .prose-content ul {
+        @apply list-disc space-y-2 pl-5 marker:text-stone-400;
+    }
+
+    .prose-content ol {
+        @apply list-decimal space-y-2 pl-5 marker:text-stone-400;
+    }
+
+    .prose-content blockquote {
+        @apply border-l-2 border-stone-300 pl-4 font-serif text-lg italic text-stone-600 dark:border-stone-700 dark:text-stone-400;
+    }
+
+    .prose-content :not(pre) > code {
+        @apply rounded bg-stone-200/70 px-1.5 py-0.5 font-mono text-[0.85em] text-stone-900 dark:bg-stone-800 dark:text-stone-100;
+    }
+
+    .prose-content pre {
+        @apply overflow-x-auto rounded-md bg-stone-900 p-4 font-mono text-sm text-stone-100 dark:bg-stone-900 dark:ring-1 dark:ring-stone-800;
+    }
 }
