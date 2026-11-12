@@ -31,7 +31,7 @@ return [
 
     'location' => env('PORTFOLIO_LOCATION', 'Hidalgo, México'),
 
-    'email' => env('PORTFOLIO_EMAIL', 'hola@ejemplo.com'),
+    'email' => env('PORTFOLIO_EMAIL', 'danivh999@gmail.com'),
 
     'resume_url' => env('PORTFOLIO_RESUME_URL'),
 
